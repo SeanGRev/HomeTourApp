@@ -7,11 +7,15 @@ public class Room extends Fixture {
 	
 	public Room(String name, String shortDescription, String longDescription) {
 		super(name, shortDescription, longDescription);
-		this.exits = new Room[10]; // size is your choice
+		this.exits = new Room[3]; // size is your choice
 	}
 	
 	public String getLongDesc() {
 		return this.longDescription;
+	}
+	
+	public void setExits(Room[] exits) {
+		this.exits = exits;
 	}
 	
 	public Room[] getExits() {
@@ -20,8 +24,22 @@ public class Room extends Fixture {
 		return exitsArr;
 	}
 	
-	public Room getExit(int exitSelection) {
-		Room exit = exits[exitSelection];
+	public Room getExit(String direction) {
+		Room exit;
+		
+		switch(direction):
+			case "right":
+				exit = exits[0];
+				break;
+			case "front":
+				exit = exits[1];
+				break;
+			case "left":
+				exit = exits[2];
+				break;
+			default:
+				break;
+		
 		return exit;
 	}
 	

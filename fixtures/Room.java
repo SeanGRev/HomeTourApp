@@ -4,10 +4,12 @@ public class Room extends Fixture {
 
 	// Variables
 	Room[] exits;
+	Fixture[] items;
 	
 	public Room(String name, String shortDescription, String longDescription) {
 		super(name, shortDescription, longDescription);
-		this.exits = new Room[3]; // size is your choice
+		this.exits = new Room[4]; // size is your choice
+		this.items = new Fixture[3];
 	}
 	
 	public String getLongDesc() {
@@ -27,7 +29,7 @@ public class Room extends Fixture {
 	public Room getExit(String direction) {
 		Room exit;
 		
-		switch(direction):
+		switch(direction) {
 			case "right":
 				exit = exits[0];
 				break;
@@ -38,7 +40,9 @@ public class Room extends Fixture {
 				exit = exits[2];
 				break;
 			default:
+				exit = null;
 				break;
+		}
 		
 		return exit;
 	}

@@ -11,7 +11,10 @@ public class Main {
 	
 	public static void main(String[] args) {
 		printInitialMessage();
-		printRoom(player);
+		while(true){
+			printRoom(player);
+			parse(collectInput(),player);
+		}
 	}
 	
 	private static void printInitialMessage() {
@@ -23,18 +26,22 @@ public class Main {
 	
 	private static void printRoom(Player player) {
 		
-		System.out.println("Current Location: " + player.currentRoom.getName() + "\n");
+		System.out.println("| Current Location: " + player.currentRoom.getName() + " |");
 		System.out.println(player.currentRoom.getLongDescription() + "\n");
 		
 		System.out.println("Exits: ");
 		// Exits Array
 		Room[] exits = player.currentRoom.getExits();
+		int i = 1;
 		for(Room exit : exits) {
-			int i = 1;
-			System.out.println(i + ":" + exit.getShortDescription());
+			System.out.println(i + ". " + exit.getShortDescription());
+			i++;
 		}
-		
-		
+		System.out.print("\n");
+	}
+	
+	private static void movePlayer(Player player, Room room) {
+		player.setCurrentRoom(room);
 	}
 
 	private static String[] collectInput() {
@@ -47,7 +54,15 @@ public class Main {
 	}
 		
 	private static void parse(String[] command, Player player) {
-
+		String action = command[0];
+		String target = command[1];
+		
+		// Movement
+		if(action.equals("move")) {
+			if(target.equals("right")) {
+				player.setCurrentRoom(player.currentRoom.getExits()[0]);
+			}
+		}
 	}
 	
 }

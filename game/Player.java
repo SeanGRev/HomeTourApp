@@ -10,6 +10,10 @@ public class Player {
 		currentRoom = room;
 	}
 	
+	public void setCurrentRoom(Room room) {
+		this.currentRoom = room;
+	}
+	
 
 	
 }

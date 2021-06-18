@@ -19,6 +19,7 @@ public class Main {
 			System.out.println("Continue?: ");
 			control = scan.nextLine();
 			if(control.equals("q")) {
+				System.out.println("Closed");
 				break;
 			}
 			else if(control.equals("")) {
@@ -122,7 +123,7 @@ public class Main {
 				}
 			}
 			else {
-				System.out.println("Sorry but I have no idea what you mean by that.\n");
+				System.out.println("There are not that many rooms connected to this room.\n");
 			}
 		}
 		// Interact with items
@@ -130,14 +131,20 @@ public class Main {
 			if(target.equals("1")) {
 				object = player.currentRoom.getItems()[0];
 				System.out.println(object.getDialogue() + "\n");
+				object.setNothing();
 			}
 			else if(target.equals("2")) {
 				object = player.currentRoom.getItems()[1];
 				System.out.println(object.getDialogue() + "\n");
+				object.setNothing();
 			}
 			else if(target.equals("3")) {
 				object = player.currentRoom.getItems()[2];
 				System.out.println(object.getDialogue() + "\n");
+				object.setNothing();
+			}
+			else {
+				System.out.println("There are not that many items in the room.");
 			}
 		}
 	}

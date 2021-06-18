@@ -13,4 +13,10 @@ public class Item extends Fixture {
 		return this.dialogue;
 	}
 	
+	public void setNothing() {
+		this.name = "Nothing";
+		this.shortDescription = "Nothing";
+		this.longDescription = "Nothing";
+		this.dialogue = "Nothing here but air";
+	}
 }

@@ -10,16 +10,26 @@ public class Main {
 	static Player player = new Player(rm.startingRoom);
 	
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String control = "";
 		printInitialMessage();
 		while(true){
 			printRoom(player);
 			parse(collectInput(),player);
+			System.out.println("Continue?: ");
+			control = scan.nextLine();
+			if(control.equals("q")) {
+				break;
+			}
+			else if(control.equals("")) {
+				continue;
+			}
 		}
 	}
 	
 	private static void printInitialMessage() {
-		System.out.println("Alright let's do this. Should be a simple burglary.\n" +
-				"Get in grab anything that has some value and get out. Simple.\n" +
+		System.out.println("Alright let's do this. Should be a simple survey of the house.\n" +
+				"Get in see if there is anything of value and get out. Simple.\n" +
 				"I'll drop you off here and wait around the corner. Be careful.\n" + 
 				"Don't get caught.\n");
 	}
@@ -29,10 +39,19 @@ public class Main {
 		System.out.println("| Current Location: " + player.currentRoom.getName() + " |");
 		System.out.println(player.currentRoom.getLongDescription() + "\n");
 		
+		System.out.println("Items: ");
+		// Items Array
+		Item[] items = player.currentRoom.getItems();
+		int i = 1;
+		for(Item item : items) {
+			System.out.println(i + ". " + item.getShortDescription());
+			i++;
+		}
+		System.out.print("\n");
 		System.out.println("Exits: ");
 		// Exits Array
 		Room[] exits = player.currentRoom.getExits();
-		int i = 1;
+		i = 1;
 		for(Room exit : exits) {
 			System.out.println(i + ". " + exit.getShortDescription());
 			i++;
@@ -57,10 +76,11 @@ public class Main {
 		String action = command[0];
 		String target = command[1];
 		Room destination;
+		Item object;
 		// Movement
 		if(action.equals("move")) {
 			// Move right
-			if(target.equals("right")) {
+			if(target.equals("1")) {
 				destination = player.currentRoom.getExits()[0];
 				
 				if(destination.getLongDescription() != "Invalid") {
@@ -71,7 +91,7 @@ public class Main {
 				}
 				
 			}
-			else if(target.equals("front")) {
+			else if(target.equals("2")) {
 				destination = player.currentRoom.getExits()[1];
 				
 				if(destination.getLongDescription() != "Invalid") {
@@ -81,7 +101,7 @@ public class Main {
 					System.out.println("That is a wall. You cannot walk through a wall.\n");
 				}
 			}
-			else if(target.equals("left")) {
+			else if(target.equals("3")) {
 				destination = player.currentRoom.getExits()[2];
 				
 				if(destination.getLongDescription() != "Invalid") {
@@ -91,7 +111,7 @@ public class Main {
 					System.out.println("We are walking through house not playing bumper cars.\n");
 				}
 			}
-			else if(target.equals("back")) {
+			else if(target.equals("4")) {
 				destination = player.currentRoom.getExits()[3];
 				
 				if(destination.getLongDescription() != "Invalid") {
@@ -103,6 +123,21 @@ public class Main {
 			}
 			else {
 				System.out.println("Sorry but I have no idea what you mean by that.\n");
+			}
+		}
+		// Interact with items
+		else if(action.equals("interact")) {
+			if(target.equals("1")) {
+				object = player.currentRoom.getItems()[0];
+				System.out.println(object.getDialogue() + "\n");
+			}
+			else if(target.equals("2")) {
+				object = player.currentRoom.getItems()[1];
+				System.out.println(object.getDialogue() + "\n");
+			}
+			else if(target.equals("3")) {
+				object = player.currentRoom.getItems()[2];
+				System.out.println(object.getDialogue() + "\n");
 			}
 		}
 	}
